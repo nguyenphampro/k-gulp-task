@@ -1,0 +1,22 @@
+{
+  "name": "k-gulp-task",
+  "description": "",
+  "main": "",
+  "authors": [
+    "baonguyen"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/baonguyenyam/k-gulp-task",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.0.0",
+    "animate.css": "^3.5.2",
+    "font-awesome": "Font-Awesome#^4.6.3"
+  }
+}

@@ -1,0 +1,69 @@
+config: 
+# Concat
+  concat: 
+    namejs: addons
+    namecss: addons
+    js: 
+      - "bower_components/jquery/dist/jquery.js"
+    css: 
+      - "bower_components/animate.css/animate.css"
+# Base config
+  url: "./"
+  source: "src"
+  views: "src/views"
+  dest: "dist"
+  tmp: "tmp"
+  docs: "docs"
+  test: "test"
+  resources: "resources"
+  config: "config"
+  fonts: "fonts"
+  data: "data"
+  blank: "_blank"
+  images: "img"
+# Layout
+  layouts: 
+    assets: "partials"
+    root: "templates"
+    jade: "templates/jade-pug"
+    hamber: "templates/hamber"
+# Scripts
+  scripts: 
+    assets: "js"
+    root: "scripts"
+    typescript: "scripts/typescript"
+    javascript: "scripts/js"
+    coffee: "scripts/coffee"
+# Styles
+  styles: 
+    assets: "css"
+    root: "styles"
+    css: "styles/css"
+    less: "styles/less"
+    sass: "styles/sass"
+    stylus: "styles/stylus"
+# Ignore
+  ignore: 
+    copy: "{**/*.jade,**/*.js,**/*.ts,**/*.coffee}"
+    scripts: "{**/*.ts,**/*.coffee}"
+    jade: "{include,include/**}"
+    sass: "{include,include/**}"
+    css: "{include,include/**}"
+    less: "{include,include/**}"
+    test: "{vendor,vendor/**}"
+# Config Host
+  host: "127.0.0.1"
+  port: "8888"
+# Packer
+  packer: main.js
+  packerdist: app.js #to app.min.js
+# License
+  title: "Gulp App"
+  author: 
+    email: "baonguyenyam@gmail.com"
+    name: "BaoNguyen"
+    link: "https://github.com/baonguyenyam"
+    coding: "Coding by Bao Nguyen"
+  license: "MIT"
+  name: "Bao Nguyen Apps"
+  version: "1.0"
