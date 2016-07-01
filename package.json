@@ -74,6 +74,7 @@
     "js-yaml": "^3.6.1",
     "jshint-stylish": "^2.2.0",
     "main-bower-files": "^2.13.1",
+    "marko": "^3.7.0",
     "pug-lint": "^2.2.2",
     "require-dir": "^0.3.0",
     "rev-del": "^1.0.5",
