@@ -1,0 +1,1 @@
+{"version":3,"sources":["includes/vendor.js"],"names":[],"mappings":";;AAAA,EAAE,QAAF,EAAY,KAAZ,CAAkB,YAAW;AACzB,MAAE,SAAF,EAAa,IAAb,CAAkB,+BAAlB;AACH,CAFD","file":"includes/vendor.js","sourcesContent":["$(document).ready(function() {\r\n    $(\"#k-tast\").html(\"This is Hello World by JQuery\");\r\n});"],"sourceRoot":"/source/"}

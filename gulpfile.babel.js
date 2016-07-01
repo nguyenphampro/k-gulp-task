@@ -5,6 +5,7 @@ import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import browserSyncLib from 'browser-sync';
 import autoprefixer from 'autoprefixer';
+import minimist from 'minimist';
 import wrench from 'wrench';
 import yargs from 'yargs';
 import runSequence from 'run-sequence';
@@ -23,8 +24,8 @@ let browserSync = browserSyncLib.create();
 let config = load.config;
 
 // Call ENV 
-// let setgulp = minimist(process.argv.slice(2));
-let setgulp = yargs.argv;
+let setgulp = minimist(process.argv.slice(2));
+// let setgulp = yargs.argv;
 
 let target = setgulp.production ? config.dest : config.tmp;
 // Load Gulp tasks folder
@@ -82,8 +83,8 @@ gulp.task('product', function(cb) {
         'htmlmin',
         'csscomb',
         'tobase64',
-        'rev',
         'packer',
+        'rev',
         cb
     );
 });
