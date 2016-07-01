@@ -85,6 +85,7 @@ gulp.task('product', function(cb) {
         'tobase64',
         'packer',
         'rev',
+        'revreplace',
         cb
     );
 });

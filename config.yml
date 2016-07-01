@@ -26,7 +26,6 @@ config:
     assets: "partials"
     root: "templates"
     jade: "templates/jade-pug"
-    hamber: "templates/hamber"
 # Scripts
   scripts: 
     assets: "js"

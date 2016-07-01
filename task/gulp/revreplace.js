@@ -23,10 +23,17 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
 
     // Run task
     gulp.task('revreplace', () => {
-    var target2 = gulp.src('./public/**/*.html');
-        return target2.pipe(inject(gulp.src(['./public/**/*.js', './public/**/*.css'],  {read: false, ignorePath: '/public/', addRootSlash: true})))
-        .pipe(replace('/public/', '/'))
-         .pipe(gulp.dest(dest));
+        var target2 = gulp.src(path.join(target, '**/*.html'));
+        return target2.pipe(inject(gulp.src([
+                path.join(target, '**/*.css'),
+                path.join(target, '**/*.js')
+            ], {
+                read: false,
+                ignorePath: '/' + target + '/',
+                addRootSlash: true
+            })))
+            .pipe(replace('/' + target + '/', '/'))
+            .pipe(gulp.dest(dest));
     });
 
 };

@@ -1,0 +1,46 @@
+include _config.jade
+// Meta Tag
+meta(name='keywords', content='#{cfg_keywords}')
+meta(name='description', content='#{cfg_description}')
+meta(name='robots', content='noindex, nofollow')
+meta(name='apple-itunes-app', content='app-id=#{app_appleID}')
+// SEO MAP
+meta(name='DC.title', content='#{cfg_title}')
+meta(name='geo.region', content='#{seo_geo}')
+meta(name='geo.placename', content='#{cfg_name}')
+meta(name='geo.position', content='#{seo_geo_lng};#{seo_geo_dlg}')
+meta(name='ICBM', content='#{seo_geo_lng},#{seo_geo_dlg}')
+// SEO
+meta(name='author', content='#{cfg_author}')
+link(rel='canonical', href='//#{cfg_url}/')
+// Social: Twitter
+meta(name='twitter:card', content='#{cfg_title}')
+meta(name='twitter:site', content='@#{cfg_url}')
+meta(name='twitter:creator', content='@author')
+meta(name='twitter:title', content='#{cfg_title}')
+meta(name='twitter:description', content='#{cfg_content}')
+meta(name='twitter:image:src', content='//#{cfg_url}/public/img/logo.png')
+// Social: Facebook / Open Graph
+meta(property='fb:admins', content='#{app_facebook_adminsID}')
+meta(property='fb:app_id', content='#{app_facebook_ID}')
+meta(property='og:url', content='//#{cfg_url}/')
+meta(property='og:type', content='article')
+meta(property='og:title', content='#{cfg_title}')
+meta(property='og:image', content='//#{cfg_url}/public/img/logo.png')
+meta(property='og:description', content='#{cfg_content}')
+meta(property='og:site_name', content='#{cfg_name}')
+meta(property='article:author', content='//www.facebook.com/#{cfg_sitenameurl}')
+meta(property='article:publisher', content='//www.facebook.com/#{cfg_sitenameurl}')
+// Social: Google+ / Schema.org
+link(rel='author', href='//plus.google.com/+#{cfg_sitenameurl}/')
+link(rel='publisher', href='//plus.google.com/+#{cfg_sitenameurl}/')
+meta(itemprop='name', content='#{cfg_name}')
+meta(itemprop='description', content='#{cfg_content}')
+meta(itemprop='image', content='//#{cfg_url}/public/img/logo.png')
+// Meta Tag Search
+link(rel='search', type='application/opensearchdescription+xml', title='#{cfg_name} Search', href='//#{cfg_url}/SearchEngineInfo.xml')
+meta(name='robots', content='index, follow')
+meta(name='apple-mobile-web-app-capable', content='yes')
+meta(name='apple-mobile-web-app-title', content='#{cfg_content}')
+link(rel='alternate', hreflang='x-default', href='//#{cfg_url}/')
+link(rel='alternate', hreflang='vi-VN', href='//#{cfg_url}/')
