@@ -85,10 +85,14 @@ gulp.task('product', function(cb) {
         'tobase64',
         'packer',
         'rev',
+        'delete-css',
+        'delete-js',
+        'delete-packer',
         'revreplace',
         cb
     );
 });
+
 
 // Test tasks 
 gulp.task('testing', function(cb) {
