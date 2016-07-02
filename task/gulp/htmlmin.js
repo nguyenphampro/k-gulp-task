@@ -17,7 +17,11 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
             .pipe(gulpif(setgulp.production, minifyHtml({
                 collapseWhitespace: true,
                 conservativeCollapse: true,
-                collapseInlineTagWhitespace: true
+                collapseInlineTagWhitespace: true,
+                collapseBooleanAttributes: true,
+                removeCommentsFromCDATA: true,
+                removeEmptyAttributes: true,
+                removeRedundantAttributes: true
             })))
             .pipe(plugins.changed(dest))
             .pipe(gulp.dest(dest));

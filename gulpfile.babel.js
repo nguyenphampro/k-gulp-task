@@ -17,11 +17,23 @@ const load = yaml.load(fs.readFileSync("./config.yml"));
 // Global 
 const plugins = gulpLoadPlugins();
 
+// Create karma server
+const KarmaServer = require('karma').Server;
+
 // Create a new browserSync
 let browserSync = browserSyncLib.create();
 
+const defaultNotification = function(err) {
+    return {
+        subtitle: err.plugin,
+        message: err.message,
+        sound: 'Funk',
+        onLast: true,
+    };
+};
+
 // Call Config 
-let config = load.config;
+let config = Object.assign({}, load.config, defaultNotification);
 
 // Call ENV 
 let setgulp = minimist(process.argv.slice(2));
@@ -45,7 +57,7 @@ gulp.task('test', ['clean'], () => {
 });
 
 // Build task
-gulp.task('build', ['clean'], () => {
+gulp.task('build', ['cleanall'], () => {
     gulp.start('product');
 });
 
@@ -67,6 +79,7 @@ gulp.task('k-task', function(cb) {
 gulp.task('serve', function(cb) {
     runSequence(
         'k-task',
+        'browserify',
         'browserSync',
         'watch',
         cb
@@ -81,6 +94,7 @@ gulp.task('product', function(cb) {
         'cssmin',
         'uglify',
         'htmlmin',
+        'imagemin',
         'csscomb',
         'tobase64',
         'packer',
@@ -94,13 +108,11 @@ gulp.task('product', function(cb) {
 });
 
 
-// Test tasks 
-gulp.task('testing', function(cb) {
-    runSequence(
-        'k-task',
-        // Call new task 
-        'jshint',
-        'eslint',
-        cb
-    );
+// Testing
+gulp.task('testing', ['eslint'], (done) => {
+    new KarmaServer({
+        configFile: path.join(__dirname, '/karma.conf.js'),
+        singleRun: !args.watch,
+        autoWatch: args.watch
+    }, done).start();
 });

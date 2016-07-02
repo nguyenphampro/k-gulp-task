@@ -31,14 +31,17 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
             .pipe(plugins.plumber())
             .pipe(gulpif(!setgulp.production, plugins.sourcemaps.init()))
             .pipe(plugins.sass({
-                outputStyle: 'expanded',
-                precision: 10,
-                includePaths: [
-                    // 'node_modules/ionic-angular/',
-                    // 'node_modules/ionicons/dist/scss',
-                    path.join(url.source, url.styles.sass)
-                ]
-            }).on('error', plugins.sass.logError))
+                    outputStyle: 'expanded',
+                    precision: 10,
+                    includePaths: [
+                        // 'node_modules/ionic-angular/',
+                        // 'node_modules/ionicons/dist/scss',
+                        path.join(url.source, url.styles.sass)
+                    ]
+                }).on('error', function(err) {
+                    plugins.util.log(err);
+                })
+                .on('error', plugins.notify.onError(config.defaultNotification)))
             .pipe(plugins.postcss([autoprefixer(autoprefixerOpts)]))
             .pipe(gulpif(!setgulp.production, plugins.sourcemaps.write('./')))
             .pipe(gulp.dest(dest))

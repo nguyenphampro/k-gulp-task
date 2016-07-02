@@ -47,6 +47,7 @@ config:
     scripts: "{**/*.ts,**/*.coffee}"
     jade: "{include,include/**}"
     sass: "{include,include/**}"
+    stylus: "{include,include/**}"
     css: "{include,include/**}"
     less: "{include,include/**}"
     test: "{vendor,vendor/**}"
