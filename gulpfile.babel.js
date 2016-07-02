@@ -83,7 +83,6 @@ gulp.task('live', function(cb) {
     runSequence(
         'k-task',
         'inject',
-        'browserify',
         'browserSync',
         'watch',
         cb
@@ -95,6 +94,8 @@ gulp.task('product', function(cb) {
     runSequence(
         'k-task',
         // Call new task 
+        'favicon',
+        'inject-favicon-markups',
         'cssmin',
         'uglify',
         'htmlmin',

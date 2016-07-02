@@ -2,6 +2,7 @@
 
 import path from 'path';
 import del from 'del';
+import fs from 'fs';
 import realFavicon from 'gulp-real-favicon';
 
 module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
@@ -9,16 +10,16 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
     let dest = path.join(target);
 
     // Run task
+    let FAVICON_DATA_FILE = 'favicon.json';
 
 
     gulp.task('favicon', (done) => {
 
-        var FAVICON_DATA_FILE = 'faviconData.json';
 
         return realFavicon.generateFavicon({
-            masterPicture: 'TODO: Path to your master picture',
-            dest: 'TODO: Path to the directory where to store the icons',
-            iconsPath: '/',
+            masterPicture: url.favicon,
+            dest: path.join(target, 'favicon'),
+            iconsPath: '/favicon',
             design: {
                 ios: {
                     pictureAspect: 'noChange',
@@ -48,7 +49,7 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
                     pictureAspect: 'noChange',
                     themeColor: '#ffffff',
                     manifest: {
-                        name: 'gfdgfdgfdg',
+                        name: 'Favicon',
                         display: 'standalone',
                         orientation: 'notSet',
                         onConflict: 'override',
@@ -78,9 +79,11 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
 
 
     gulp.task('inject-favicon-markups', () => {
-        gulp.src(['TODO: List of the HTML files where to inject favicon markups'])
+        gulp.src([
+                path.join(target, '**/*.html')
+            ])
             .pipe(realFavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).favicon.html_code))
-            .pipe(gulp.dest('TODO: Path to the directory where to store the HTML files'));
+            .pipe(gulp.dest(dest));
     });
 
     gulp.task('check-for-favicon-update', (done) => {

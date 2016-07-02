@@ -9,12 +9,14 @@ config:
       - "bower_components/animate.css/animate.css"
 # Base config
   url: "./"
+  baseUrl: "./"
   source: "src"
   views: "src/views"
   dest: "dist"
   tmp: "tmp"
   docs: "docs"
   test: "test"
+  favicon: "resources/favicon.png"
   resources: "resources"
   config: "config"
   fonts: "fonts"
@@ -44,7 +46,7 @@ config:
     stylus: "styles/stylus"
 # Ignore
   ignore: 
-    copy: "{**/*.jade,**/*.njk,**/*.js,**/*.ts,**/*.coffee}"
+    copy: "{**/*.jade,**/*.nunjucks,**/*.js,**/*.ts,**/*.coffee}"
     scripts: "{**/*.ts,**/*.coffee}"
     jade: "{include,include/**}"
     nunjucks: "{include,include/**}"

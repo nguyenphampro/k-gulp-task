@@ -14,7 +14,7 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
 
     // Run task
 
-    // Nunjucks template compile
+    // nunjucks template compile
     gulp.task('nunjucks', () => {
         let siteData = {};
         if (fs.existsSync(dataPath)) {
@@ -31,7 +31,7 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
                             json = JSON.parse(fs.readFileSync(file, 'utf8'));
                         }
                     } catch (e) {
-                        console.log('Error Parsing DATA file: ' + file);
+                        console.log('Error Parsing JSON file: ' + file);
                         console.log('==== Details Below ====');
                         console.log(e);
                     }
@@ -42,7 +42,7 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
 
         // Add --debug option to your gulp task to view
         // what data is being loaded into your templates
-        if (args.debug) {
+        if (setgulp.debug) {
             console.log('==== DEBUG: site.data being injected to templates ====');
             console.log(siteData);
             console.log('\n==== DEBUG: package.json config being injected to templates ====');
@@ -50,27 +50,16 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
         }
 
         return gulp.src([
-                path.join(url.source, '**/*.nunjucks'),
+                path.join(url.source, url.layouts.nunjucks, '**/*.nunjucks'),
                 '!' + path.join(url.source, '{**/\_*,**/\_*/**}'),
                 '!' + path.join(url.source, url.layouts.nunjucks, url.ignore.nunjucks)
             ])
-            .pipe(plugins.changed(dest))
+            .pipe(plugins.changed(destnunjucks))
             .pipe(plugins.plumber())
-            .pipe(plugins.data({
-                config: config,
-                debug: true,
-                site: {
-                    data: siteData
-                }
-            }))
             .pipe(nunjucks({
-                    searchPaths: [path.join(url.source)],
-                    ext: '.html'
-                })
-                .on('error', function(err) {
-                    plugins.util.log(err);
-                }))
-            .on('error', plugins.notify.onError(config.defaultNotification))
+                searchPaths: [path.join(url.source)],
+                ext: '.html'
+            }))
             .pipe(plugins.htmlmin({
                 collapseBooleanAttributes: true,
                 conservativeCollapse: true,
@@ -78,7 +67,7 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
                 removeEmptyAttributes: true,
                 removeRedundantAttributes: true
             }))
-            .pipe(gulp.dest(dest))
+            .pipe(gulp.dest(destnunjucks))
             .on('end', browserSync.reload);
     });
 }
