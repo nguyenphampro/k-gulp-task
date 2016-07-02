@@ -32,9 +32,9 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
 
             let bundler = browserify(customOpts);
 
-            if (!args.production) {
+            if (!setgulp.production) {
                 // Setup Watchify for faster builds
-                let opts = _.assign({}, watchify.args, customOpts);
+                let opts = _.assign({}, watchify.setgulp, customOpts);
                 bundler = watchify(browserify(opts));
             }
 
@@ -56,14 +56,10 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
                     .pipe(plugins.sourcemaps.init({
                         loadMaps: true
                     }))
-                    .pipe(gulpif(args.production, plugins.uglify()))
+                    .pipe(gulpif(setgulp.production, plugins.uglify()))
                     .on('error', plugins.notify.onError(config.defaultNotification))
-                    .pipe(plugins.rename(function(filepath) {
-                        // Remove 'source' directory as well as prefixed folder underscores
-                        // Ex: 'src/_scripts' --> '/scripts'
-                        filepath.dirname = filepath.dirname.replace(url.source, '').replace('_', '');
-                    }))
-                    .pipe(plugins.sourcemaps.write('./'))
+
+                .pipe(plugins.sourcemaps.write('./'))
                     .pipe(gulp.dest(dest))
                     // Show which file was bundled and how long it took
                     .on('end', function() {
@@ -74,7 +70,7 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
                     });
             };
 
-            if (!args.production) {
+            if (!setgulp.production) {
                 bundler.on('update', rebundle); // on any dep update, runs the bundler
                 bundler.on('log', plugins.util.log); // output build logs to terminal
             }
@@ -84,13 +80,14 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
 
     // Browserify Task
     gulp.task('browserify', (done) => {
-        return glob('./' + path.join(url.source, url.scripts.root, '**/*.js'), function(err, files) {
-            if (err) {
-                done(err);
-            }
+        return glob('./' + path.join(url.source, url.scripts.root, '**/*.js'),
+            function(err, files) {
+                if (err) {
+                    done(err);
+                }
 
-            return browserifyTask(files);
-        });
+                return browserifyTask(files);
+            });
     });
 
 }

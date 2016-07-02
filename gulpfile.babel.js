@@ -55,6 +55,10 @@ gulp.task('test', ['clean'], () => {
     gulp.start('testing');
 });
 
+gulp.task('serve', ['clean'], () => {
+    gulp.start('live');
+});
+
 // Build task
 gulp.task('build', ['cleanall'], () => {
     gulp.start('product');
@@ -75,9 +79,10 @@ gulp.task('k-task', function(cb) {
 });
 
 // Server with watch 
-gulp.task('serve', function(cb) {
+gulp.task('live', function(cb) {
     runSequence(
         'k-task',
+        'inject',
         'browserify',
         'browserSync',
         'watch',
@@ -111,7 +116,7 @@ gulp.task('product', function(cb) {
 gulp.task('testing', ['eslint'], (done) => {
     new KarmaServer({
         configFile: path.join(__dirname, '/karma.conf.js'),
-        singleRun: !args.watch,
-        autoWatch: args.watch
+        singleRun: !setgulp.watch,
+        autoWatch: setgulp.watch
     }, done).start();
 });

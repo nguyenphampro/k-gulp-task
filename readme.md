@@ -57,7 +57,7 @@ run `npm run check`
 
 ### Config 
 
-Config file `config.jade`
+Config file `config.yml`
 
 ### Working in Project
 

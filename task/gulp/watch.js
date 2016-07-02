@@ -10,6 +10,13 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
     // Run task
     gulp.task('watch', () => {
         if (!setgulp.production) {
+
+            // Concat
+            gulp.watch([
+                path.join('./config.yml')
+            ], ['concat']);
+
+
             // Styles
             gulp.watch([
                 path.join(url.source, url.styles.root, '**/*.css')

@@ -12,7 +12,7 @@ then
 	printf "\033[1;31mApp is ready in your system. To Re-Install, please remove the 'install.lock' file and run again! Thanks.\033[0m\n"
 else
 	printf "\033[0;33mInstall Global Modules...\033[0m\n"
-	npm i gulp gulp-cli bower -g
+	npm i gulp gulp-cli bower  phantomjs -g
 	printf "\033[0;33mUpdate Bower Components...\033[0m\n"
 	bower update
     printf "\033[0;33mInstall Node Modules...\033[0m\n"
