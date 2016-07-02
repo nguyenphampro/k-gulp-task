@@ -10,7 +10,7 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
     let dest = path.join(target);
 
     // Run task
-    let FAVICON_DATA_FILE = 'favicon.json';
+    let FAVICON_DATA_FILE = path.join(target, 'favicon.json');
 
 
     gulp.task('favicon', (done) => {
