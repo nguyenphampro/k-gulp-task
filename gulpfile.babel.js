@@ -11,7 +11,7 @@ import runSequence from 'run-sequence';
 
 const fs = require('fs');
 const yaml = require("js-yaml");
-const load = yaml.load(fs.readFileSync("./config.yml"));
+const load = yaml.load(fs.readFileSync("./k-task/config.yml"));
 
 // Global 
 const plugins = gulpLoadPlugins();
@@ -40,10 +40,10 @@ let setgulp = minimist(process.argv.slice(2));
 let target = setgulp.production ? config.dest : config.tmp;
 
 // Load Gulp tasks folder
-wrench.readdirSyncRecursive('./task/gulp').filter((file) => {
+wrench.readdirSyncRecursive('./k-task/task/gulp').filter((file) => {
     return (/\.(js)$/i).test(file);
 }).map(function(file) {
-    require('./task/gulp/' + file)(gulp, setgulp, plugins, config, target, browserSync);
+    require('./k-task/task/gulp/' + file)(gulp, setgulp, plugins, config, target, browserSync);
 });
 
 // Default task
@@ -116,7 +116,7 @@ gulp.task('product', function(cb) {
 // Testing
 gulp.task('testing', ['eslint'], (done) => {
     new KarmaServer({
-        configFile: path.join(__dirname, '/karma.conf.js'),
+        configFile: path.join('k-task', '/karma.conf.js'),
         singleRun: !setgulp.watch,
         autoWatch: setgulp.watch
     }, done).start();

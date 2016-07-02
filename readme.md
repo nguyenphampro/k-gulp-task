@@ -69,6 +69,8 @@ Build: run `npm run pro`
 
 Dev: run `npm run dev`
 
+Tools: run `npm run tool`
+
 ## Licence
 
 Copyright &copy; 2016 Bao Nguyen
