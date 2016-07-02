@@ -7,7 +7,6 @@ import browserSyncLib from 'browser-sync';
 import autoprefixer from 'autoprefixer';
 import minimist from 'minimist';
 import wrench from 'wrench';
-import yargs from 'yargs';
 import runSequence from 'run-sequence';
 
 const fs = require('fs');
@@ -37,7 +36,6 @@ let config = Object.assign({}, load.config, defaultNotification);
 
 // Call ENV 
 let setgulp = minimist(process.argv.slice(2));
-// let setgulp = yargs.argv;
 
 let target = setgulp.production ? config.dest : config.tmp;
 // Load Gulp tasks folder

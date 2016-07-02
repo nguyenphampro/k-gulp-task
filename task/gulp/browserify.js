@@ -18,7 +18,7 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
 
     let browserifyTask = (files) => {
         return files.map((entry) => {
-            let dest = path.resolve(taskTarget);
+            let dest = path.resolve(target);
 
             // Options
             let customOpts = {
