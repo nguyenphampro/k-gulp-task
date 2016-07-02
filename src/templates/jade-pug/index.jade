@@ -1,6 +1,9 @@
 extends include/layout
-
+//- Variables for each page 
 block variables
   - var title = 'Custom Title'
   - var bodyclass = 'index'
-
+//- Begin page
+block body 
+  h1=config.title
+  p=config.SEO.cfg_description

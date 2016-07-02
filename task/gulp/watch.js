@@ -40,10 +40,14 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
                 path.join(url.source, url.scripts.root, '**/*.ts')
             ], ['ts']);
 
-            // Scripts
+            // Templates
             gulp.watch([
                 path.join(url.source, '**/*.jade')
             ], ['jade']);
+
+            gulp.watch([
+                path.join(url.source, '**/*.marko')
+            ], ['marko']);
 
 
             // Copy

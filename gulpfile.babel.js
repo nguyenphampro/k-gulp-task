@@ -38,6 +38,7 @@ let config = Object.assign({}, load.config, defaultNotification);
 let setgulp = minimist(process.argv.slice(2));
 
 let target = setgulp.production ? config.dest : config.tmp;
+
 // Load Gulp tasks folder
 wrench.readdirSyncRecursive('./task/gulp').filter((file) => {
     return (/\.(js)$/i).test(file);
