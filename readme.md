@@ -3,8 +3,8 @@
 
 ##### Template 
 
-* Jade Teamplate
-* Nunjucks Teamplate
+* Jade Template
+* Nunjucks Template
 
 ##### Scripts 
 

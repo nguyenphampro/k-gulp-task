@@ -85,8 +85,7 @@ gulp.task('k-task', function(cb) {
 // Server with watch 
 // NOTE: Can not run browserify with runSequence
 gulp.task('live', [
-    'k-task',
-    'browserify',
+    'product',
     'browserSync',
     'watch'
 ]);
