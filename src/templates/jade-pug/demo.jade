@@ -1,0 +1,11 @@
+extends _layout/layout
+
+block variables
+  - var title = 'Custom Title'
+  - var bodyclass = 'index'
+
+block body 
+  h1=config.title
+  p=config.SEO.cfg_description
+  p=_data.config.CON.version
+  p=_data.info.SET.name

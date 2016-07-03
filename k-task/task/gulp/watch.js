@@ -50,16 +50,19 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
             // Templates
             gulp.watch([
                 path.join(url.source, '**/*.jade')
-            ], ['jade', 'inject']);
+            ], function() {
+                runSequence('jade', 'inject');
+            });
 
             gulp.watch([
                 path.join(url.source, '**/*.nunjucks')
-            ], ['nunjucks', 'inject']);
-
+            ], function() {
+                runSequence('nunjucks', 'inject');
+            });
 
             // Copy
             gulp.watch([
-                path.join(url.source, '**/*')
+                path.join(url.source, '**/*.{svg,jpg,png,gif,txt,bmp,md,json,yml,yaml,css,html,js,eot,svg,ttf,woff,woff2}')
             ], ['copy']);
 
             // All other files

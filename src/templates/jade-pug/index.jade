@@ -1,11 +1,124 @@
 extends _layout/layout
-//- Variables for each page 
+
 block variables
-  - var title = 'Custom Title'
+  - var title = 'K-Gulp Tasks'
   - var bodyclass = 'index'
-//- Begin page
+
+block css
+  link(rel='stylesheet', type='text/css', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css')
+
 block body 
-  h1=config.title
-  p=config.SEO.cfg_description
-  p=_data.config.CON.version
-  p=_data.info.SET.name
+  .container 
+    .row 
+      .col-sm-12
+        h1.display-4(style="margin:20px 0") K-Gulp Tasks
+
+        p This is a Tool for WebApp Front-End with All-in-One Gulp task 
+        h4 Github
+        p 
+          a(href="https://github.com/baonguyenyam/k-gulp-task") https://github.com/baonguyenyam/k-gulp-task
+        hr
+
+
+
+        h5 Template 
+
+        pre.prettyprint.lang-html.
+          * Jade Teamplate
+          * Nunjucks Teamplate
+
+        h5 Scripts 
+
+        pre.prettyprint.lang-html.
+          * Babel
+          * Typescript
+          * Coffee 
+
+        h5 Styles
+
+        pre.prettyprint.lang-html.
+          * SASS/SCSS
+          * LESS
+          * Stylus
+          * CSS
+
+        h5 Image Tools
+        pre.prettyprint.lang-html.
+          * SVG
+          * Real Favicon
+
+        h5 Build Tools
+        pre.prettyprint.lang-html.
+
+          * CSSMin
+          * Uglify
+          * HTML minify
+          * ImageMin
+          * Concat 
+
+        h5 Test Tools
+
+        pre.prettyprint.lang-html.
+          * Browserify
+          * BrowserSync
+          * Phantom
+          * Karma
+
+
+        h3 Install Project 
+
+        pre.prettyprint.lang-html. 
+          Windows: run file `install.bat`
+
+        pre.prettyprint.lang-html.
+          MAC/Ubuntu: run file `sh install.sh` 
+
+        h3 Update Project
+
+        pre.prettyprint.lang-html.
+          Windows: run file `update.bat`
+
+        pre.prettyprint.lang-html.
+          MAC/Ubuntu: run file `sh update.sh` 
+
+        h3 Upgrade & Check Missing package
+
+        pre.prettyprint.lang-html.
+          run `npm run check`
+
+        h3 Config 
+
+        pre.prettyprint.lang-html.
+          Config file `config.yml`
+
+        h3 Working in Project
+
+        pre.prettyprint.lang-html.
+          Test: run `npm run test`
+
+        pre.prettyprint.lang-html.
+          Serve: run `npm run serve`
+
+        pre.prettyprint.lang-html.
+          Build: run `npm run pro`
+
+        pre.prettyprint.lang-html.
+          Dev: run `npm run dev`
+
+        pre.prettyprint.lang-html.
+          Tools: run `npm run tool`
+
+        h2 Licence
+
+        p Copyright &copy; 2016 Bao Nguyen
+
+        p Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+        p The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+        p THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+        h4 Bảo Nguyên
+
+        
+  script(src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sunburst")
