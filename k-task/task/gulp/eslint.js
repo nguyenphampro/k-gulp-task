@@ -20,7 +20,7 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
                 once: true
             }))
             .pipe(plugins.eslint({
-                useEslintrc: false
+                useEslintrc: true
             }))
             .pipe(plugins.eslint.format())
             .pipe(gulpif(!browserSync.active, plugins.eslint.failAfterError()))

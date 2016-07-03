@@ -20,7 +20,6 @@ const plugins = gulpLoadPlugins();
 const KarmaServer = require('karma').Server;
 
 // Create a new browserSync
-let browserSync = browserSyncLib.create();
 
 const defaultNotification = function(err) {
     return {
@@ -39,6 +38,7 @@ let setgulp = minimist(process.argv.slice(2));
 
 let target = setgulp.production ? config.dest : config.tmp;
 
+let browserSync = browserSyncLib.create();
 // Load Gulp tasks folder
 wrench.readdirSyncRecursive('./k-task/task/gulp').filter((file) => {
     return (/\.(js)$/i).test(file);
@@ -59,6 +59,10 @@ gulp.task('serve', ['clean'], () => {
     gulp.start('live');
 });
 
+gulp.task('server', ['clean'], () => {
+    gulp.start('live');
+});
+
 // Build task
 gulp.task('build', ['cleanall'], () => {
     gulp.start('product');
@@ -68,7 +72,6 @@ gulp.task('build', ['cleanall'], () => {
 // Basic production-ready code
 gulp.task('k-task', function(cb) {
     runSequence(
-        'babel', // babel-concat
         'concat',
         'copy',
         'fonts',
@@ -78,21 +81,25 @@ gulp.task('k-task', function(cb) {
     );
 });
 
+
 // Server with watch 
-gulp.task('live', function(cb) {
-    runSequence(
-        'k-task',
-        'inject',
-        'browserSync',
-        'watch',
-        cb
-    );
-});
+// NOTE: Can not run browserify with runSequence
+gulp.task('live', [
+    'product',
+    'browserSync',
+    'watch'
+]);
+
 
 // Build production-ready code
-gulp.task('product', function(cb) {
+gulp.task('product', [
+    'k-task',
+    'browserify'
+]);
+
+// Rebuild will call by browserify
+gulp.task('rebuild', function(cb) {
     runSequence(
-        'k-task',
         // Call new task 
         'favicon',
         'inject-favicon-markups',
@@ -108,15 +115,16 @@ gulp.task('product', function(cb) {
         'delete-js',
         'delete-packer',
         'revreplace',
+        'done',
         cb
     );
 });
 
 
 // Testing
-gulp.task('testing', ['eslint'], (done) => {
+gulp.task('testing', (done) => {
     new KarmaServer({
-        configFile: path.join('k-task', '/karma.conf.js'),
+        configFile: path.join(__dirname, '/k-task/karma.conf.js'),
         singleRun: !setgulp.watch,
         autoWatch: setgulp.watch
     }, done).start();
