@@ -116,6 +116,7 @@ gulp.task('rebuild', function(cb) {
         'delete-js',
         'delete-packer',
         'revreplace',
+        'done',
         cb
     );
 });
