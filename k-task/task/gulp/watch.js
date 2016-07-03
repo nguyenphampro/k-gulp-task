@@ -62,11 +62,13 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
 
             // Copy
             gulp.watch([
-                path.join(url.source, '**/*.{svg,jpg,png,gif,txt,bmp,md,json,yml,yaml,css,html,js,eot,svg,ttf,woff,woff2}')
+                path.join(url.source, '**/*.{svg,jpg,jpeg,png,gif,txt,bmp,md,json,yml,yaml,css,html,js,eot,svg,ttf,woff,woff2}')
             ], ['copy']);
 
             // All other files
-            gulp.watch(path.join(url.views, '**/*')).on('change', browserSync.reload);
+            gulp.watch([path.join(url.tmp, '**/*'),
+                '!' + path.join(url.tmp, '**/*.{css,map,html,js}')
+            ]).on('change', browserSync.reload);
         }
     });
 }

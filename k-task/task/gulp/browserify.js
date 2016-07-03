@@ -31,11 +31,11 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
 
             let bundler = browserify(customOpts);
 
-            if (!setgulp.production) {
-                // Setup Watchify for faster builds
-                let opts = _.assign({}, watchify.setgulp, customOpts);
-                bundler = watchify(browserify(opts));
-            }
+            // if (!setgulp.production) {
+            // Setup Watchify for faster builds
+            let opts = _.assign({}, watchify.setgulp, customOpts);
+            bundler = watchify(browserify(opts));
+            // }
 
             let rebundle = function() {
                 let startTime = new Date().getTime();
@@ -55,27 +55,35 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
                     .pipe(plugins.sourcemaps.init({
                         loadMaps: true
                     }))
-                    .pipe(gulpif(setgulp.production, plugins.uglify()))
                     .on('error', plugins.notify.onError(config.defaultNotification))
                     .pipe(plugins.rename(function(filepath) {
                         filepath.dirname = filepath.dirname.replace(url.source, '').replace('src', '').replace('scripts', '');
                     }))
 
                 .pipe(plugins.sourcemaps.write('./'))
-                    // .pipe(plugins.changed(dest))
                     .pipe(gulp.dest(dest))
                     // Show which file was bundled and how long it took
                     .on('end', function() {
                         let time = (new Date().getTime() - startTime) / 1000;
                         console.log(plugins.util.colors.cyan(entry) + ' was browserified: ' + plugins.util.colors.magenta(time + 's'));
-                        return browserSync.reload('*.js');
+                        if (!setgulp.production) {
+                            gulp.start('inject', function(err) {
+                                if (err) {
+                                    done(err);
+                                } else {
+                                    return browserSync.reload('**/*.js');
+                                }
+                            });
+                        } else {
+                            return gulp.start('rebuild');
+                        }
                     });
             };
 
-            if (!setgulp.production) {
-                bundler.on('update', rebundle); // on any dep update, runs the bundler
-                bundler.on('log', plugins.util.log); // output build logs to terminal
-            }
+            // if (!setgulp.production) {
+            bundler.on('update', rebundle); // on any dep update, runs the bundler
+            bundler.on('log', plugins.util.log); // output build logs to terminal
+            // }
             return rebundle();
         });
     };
@@ -86,7 +94,6 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
             function(err, files) {
                 if (err) {
                     done(err);
-                    console.log(2);
                 }
                 return browserifyTask(files);
             });
