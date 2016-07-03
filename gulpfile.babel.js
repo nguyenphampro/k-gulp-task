@@ -122,9 +122,9 @@ gulp.task('rebuild', function(cb) {
 
 
 // Testing
-gulp.task('testing', ['eslint'], (done) => {
+gulp.task('testing', (done) => {
     new KarmaServer({
-        configFile: path.join('k-task', '/karma.conf.js'),
+        configFile: path.join(__dirname, '/k-task/karma.conf.js'),
         singleRun: !setgulp.watch,
         autoWatch: setgulp.watch
     }, done).start();

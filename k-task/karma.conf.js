@@ -4,11 +4,11 @@
 
 var fs = require('fs');
 var yaml = require("js-yaml");
-var load = yaml.load(fs.readFileSync("./config.yml"));
+var load = yaml.load(fs.readFileSync("./k-task/config.yml"));
 var path = require('path');
 var config = load.config;
 var url = config;
-var testFiles = path.join(__dirname, url.source, '**/*.test.js');
+var testFiles = path.join('../', url.test, '**/*.test.js');
 var preprocessors = {};
 preprocessors[testFiles] = ['browserify'];
 
