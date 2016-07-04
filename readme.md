@@ -66,6 +66,8 @@ Test: run `npm run test`
 
 Serve: run `npm run serve`
 
+Server: run `npm run start`
+
 Build: run `npm run pro`
 
 Dev: run `npm run dev`

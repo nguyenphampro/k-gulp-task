@@ -35,9 +35,6 @@ module.exports = function(gulp, setgulp, plugins, config, target, browserSync) {
             ], ['sass']);
 
             // Scripts
-            gulp.watch([
-                path.join(url.source, url.scripts.root, '**/*.js')
-            ], ['babel']);
 
             gulp.watch([
                 path.join(url.source, url.scripts.root, '**/*.coffee')
