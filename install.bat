@@ -10,6 +10,7 @@ if exist install.lock (
     ECHO App is ready in your system. To Re-Install, please remove the 'install.lock' file and run again! Thanks.
 ) else (
 	ECHO Install Global Modules...
+	npm install --global --production windows-build-tools
 	npm i gulp gulp-cli bower phantomjs -g
 	ECHO Update Bower Components...
 	bower update
